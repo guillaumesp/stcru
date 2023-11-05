@@ -97,14 +97,16 @@ export default class App {
                     // child.receiveShadow = true;
                 }
 
+                const baseCanBodyMaterial = new THREE.MeshStandardMaterial({
+                    metalness: 1,
+                    roughness: 0.5,
+                    transparent: true,
+                });
+
                 if(child.name === 'CanBody') {
                     if (child instanceof THREE.Mesh) {
-                       child.material = new THREE.MeshStandardMaterial({
-                        map: canTextures[0],
-                        metalness: 1,
-                        roughness: 0.4,
-                        transparent: true,
-                    });
+                       child.material = baseCanBodyMaterial;
+                       child.material.map = canTextures[0];
                         this.canBody = child;
                     }
                    
@@ -112,13 +114,9 @@ export default class App {
 
                 if(child.name === 'CanBody2') {
                     if (child instanceof THREE.Mesh) {
-                       child.material = new THREE.MeshStandardMaterial({
-                        map: canTextures[1],
-                        metalness: 1,
-                        roughness: 0.4,
-                        transparent: true,
-                        opacity: 0
-                    });
+                        child.material = baseCanBodyMaterial;
+                        child.material.map = canTextures[1];
+                        child.material.opacity = 0;
                         this.canBody2 = child;
                     }
                    
@@ -142,6 +140,7 @@ export default class App {
             this.canGroup = canGroup;
             this.canGroup.scale.set(1.9, 1.9, 1.9);
             this.scene.add(canWrapperGroup);
+
             this.addSceneLights();
             this.animateGsap();
             // this.addOrbitControls();
@@ -178,7 +177,7 @@ export default class App {
                 gsap.to(canBodyMaterial2, {opacity: 0, duration: 1, ease: 'power2.inOut'});
              }
 
-            gsap.to(this.canWrapperGroup.rotation, {y: (this.canWrapperGroup.rotation.y == 0 ? Math.PI *2*2 : 0), duration: 1, ease: 'power2.inOut'});
+            gsap.to(this.canWrapperGroup.rotation, {y: (this.canWrapperGroup.rotation.y == 0 ? Math.PI *2*2*-1 : 0), duration: 1, ease: 'power2.inOut'});
 
           
         }
@@ -191,11 +190,10 @@ export default class App {
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: true,
-                markers: true
-               
+                markers: true,
             }
         });
-        tl.to(this.canWrapperGroup.rotation, {x: Math.PI *2, duration: 1, ease: 'power2.inOut'})
+        tl.to(this.canWrapperGroup.rotation, { x: Math.PI *2, y: Math.PI *2, duration: 1, ease: 'power2.inOut'})
         
         
     }
@@ -238,19 +236,19 @@ export default class App {
         spotLight.position.set(-10, 7, 10);
         spotLight.angle = Math.PI / 10;
         spotLight.penumbra = 0.5;
-        spotLight.decay = 2;
+        spotLight.decay = 45;
         spotLight.distance = 100;
         spotLight.castShadow = true;
-        spotLight.intensity = 2;
+        spotLight.intensity = 800;
   
         const spotLight2 = new THREE.SpotLight(0xffffff);
         spotLight2.position.set(10, 7, 10);
         spotLight2.angle = Math.PI / 10;
         spotLight2.penumbra = 0.5;
-        spotLight2.decay = 2;
+        spotLight2.decay = 45;
         spotLight2.distance = 100;
         spotLight2.castShadow = true;
-        spotLight2.intensity = 2;
+        spotLight2.intensity = 800;
 
        
         // spotLight.shadow.mapSize.width = 1024;
@@ -272,7 +270,7 @@ export default class App {
             this.canGroup.position.y = Math.sin(time) * 0.1 + 0.1;
             
             this.canGroup.rotation.y = Math.cos(time) * 0.2;
-            this.canGroup.rotation.x = Math.cos(time) * 0.2;
+            this.canGroup.rotation.x = Math.cos(time) * 0.3;
             // this.canGroup.rotation.z = Math.cos(time) * 0.05;
             const intersects = this.raycaster.intersectObjects( this.canGroup.children );
             if(intersects.length > 0) {
