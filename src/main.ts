@@ -6,6 +6,8 @@ import can from './assets/can.glb';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'dat.gui';
+import gigowatts from '../public/assets/221gigowatts.png';
+import fengshui from '../public/assets/feng-shui.png';
 
 const lenis = new Lenis()
 lenis.on('scroll', ScrollTrigger.update)
@@ -84,8 +86,8 @@ export default class App {
 
 
             const canTextures = [
-                this.getCanTexture('public/assets/221gigowatts.png'),
-                this.getCanTexture('public/assets/feng-shui.png')
+                this.getCanTexture(gigowatts),
+                this.getCanTexture(fengshui)
             ];
             
             this.canTextures = canTextures;
