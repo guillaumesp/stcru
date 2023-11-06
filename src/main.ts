@@ -192,7 +192,7 @@ export default class App {
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: true,
-                markers: true,
+                markers: false,
             }
         });
         tl.to(this.canWrapperGroup.rotation, { x: Math.PI *2, y: Math.PI *2, duration: 1, ease: 'power2.inOut'})
