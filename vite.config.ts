@@ -6,9 +6,11 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.gltf', '**/*.glb'],
   publicDir: 'src/public',
-  build: {
-
+    base: 'stcru',
+    build: {
+    outDir: 'docs',
     rollupOptions: {
+      
       output: {
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
