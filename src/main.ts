@@ -105,7 +105,7 @@ export default class App {
                     transparent: true,
                 });
 
-                if(child.name === 'CanBody') {
+                if(child.name === 'CanBody1') {
                     if (child instanceof THREE.Mesh) {
                        child.material = baseCanBodyMaterial;
                        child.material.map = canTextures[0];
@@ -160,7 +160,10 @@ export default class App {
     }
 
     onWindowClick(e: MouseEvent): any {
+        console.log(this.canGroupIsHovered);
         if(this.canGroupIsHovered && this.canBody && this.canBody2) {
+       
+
             const canBodyMaterial = this.canBody.material as THREE.MeshStandardMaterial;
             const canBodyMaterial2 = this.canBody2.material as THREE.MeshStandardMaterial;
             // if(this.canWrapperGroup.rotation.y == 0) {
