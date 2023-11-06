@@ -194,20 +194,20 @@ export default class App {
             }
         });
         tl.to(this.canWrapperGroup.rotation, { x: Math.PI *2, y: Math.PI *2, duration: 1, ease: 'power2.inOut'})
-        const item = document.querySelector('#section-2') as HTMLDivElement;
-        tl.to(item, {
-            scrollTrigger: {
-              trigger: item,
-              start: "top bottom",
-              end: `+=${item.offsetHeight * 0} top`,
-              scrub: 1,
-              markers: true,
-              onUpdate: (self) => self.next()?.refresh(),
-              onLeave: () => ScrollTrigger.refresh(),
-            },
-            marginTop: `-${item.offsetHeight}`,
-            ease: "power1.out"
-          });
+        // const item = document.querySelector('#section-2') as HTMLDivElement;
+        // tl.to(item, {
+        //     scrollTrigger: {
+        //       trigger: item,
+        //       start: "top bottom",
+        //       end: `+=${item.offsetHeight * 0} top`,
+        //       scrub: 1,
+        //       markers: true,
+        //       onUpdate: (self) => self.next()?.refresh(),
+        //       onLeave: () => ScrollTrigger.refresh(),
+        //     },
+        //     marginTop: `-${item.offsetHeight}`,
+        //     ease: "power1.out"
+        //   });
         
     }
     addOrbitControls() {
